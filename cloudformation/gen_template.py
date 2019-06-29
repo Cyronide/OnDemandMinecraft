@@ -13,6 +13,7 @@ ref_region = Ref('AWS::Region')
 ref_stack_name = Ref('AWS::StackName')
 
 GIT_URL = 'https://github.com/Cyronide/OnDemandMinecraft.git'
+BOOTSTRAP_SCRIPT_DIR = '/tmp/OnDemandMinecraft/instancesetup/bootstrap.sh'
 
 t = Template()
 c = constants
@@ -153,9 +154,12 @@ server_instance = t.add_resource(Instance(
         Join('',
             [
                 '#!/bin/bash -xe\n',
-                'cd /home/ubuntu && git clone {git_url} && '
-                '/home/ubuntu/OnDemandMinecraft/instancesetup/bootstrap.sh\n'.format(
+                'cd /tmp && git clone {git_url}'
+                ' && chmod +x {script_dir}'
+                ' && {script_dir}'
+                '\n'.format(
                     git_url=GIT_URL,
+                    script_dir=BOOTSTRAP_SCRIPT_DIR
                 )
             ]
         )

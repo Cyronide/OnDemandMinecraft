@@ -1,5 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "A template for deploying an OnDemandMinecraft instance: https://github.com/Cyronide/OnDemandMinecraft.git",
     "Mappings": {
         "InstanceAmiMap": {
             "ap-east-1": {
@@ -211,7 +212,7 @@
                             "",
                             [
                                 "#!/bin/bash -xe\n",
-                                "cd /home/ubuntu && git clone https://github.com/Cyronide/OnDemandMinecraft.git && /home/ubuntu/OnDemandMinecraft/instancesetup/bootstrap.sh\n"
+                                "cd /tmp && git clone https://github.com/Cyronide/OnDemandMinecraft.git && chmod +x /tmp/OnDemandMinecraft/instancesetup/bootstrap.sh && /tmp/OnDemandMinecraft/instancesetup/bootstrap.sh\n"
                             ]
                         ]
                     }
